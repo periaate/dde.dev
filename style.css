@@ -1,0 +1,20 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#bouncing-image {
+    position: absolute;
+}
+
+
+#bouncing-text {
+	font-size: 2em;
+    position: absolute;
+	height: 2em;
+}
+
+
