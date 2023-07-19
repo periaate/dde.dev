@@ -1,20 +1,246 @@
+
+
+@font-face {
+	font-family: 'EB Garamond';
+	src: url('fonts/EBGaramond-VariableFont_wght.ttf') format('truetype');
+}
+
+
+@font-face {
+	font-family: 'Garamond Classico SC Regular';
+	src: url('fonts/Garamond Classico SC Regular.ttf') format('truetype');
+}
+
+
+
+
+* {
+    padding: 0px;
+    margin: 0px;
+    transition: all 0.3s ease-out;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     overflow: hidden;
+	font-family: 'Garamond Classico SC Regular';
 }
 
-#bouncing-image {
+@media (prefers-color-scheme: dark) {
+    html {
+        background-color: #292827;
+    }
+    * {
+        color: #d7caab;
+    }
+    #container {
+        border: #d7caab solid 1px;
+    }
+    #ball {
+        background-color: #d7caab;
+    }
+    
+    .animated-gradient {
+        background: linear-gradient(45deg, #423d39, #574f36, #7c7462);
+    }
+    .animated-gradient > noise-filter {
+        mix-blend-mode: soft-light;
+    }
+    #ball {
+        background-color: #292827;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html {
+        background-color: #e6dbc1;
+    }
+    #container {
+        border: #292827 solid 1px;
+    }
+    .animated-gradient {
+        background: linear-gradient(45deg, #d7caab, #caad68, #7c7462);
+    }
+    #ball {
+        background-color: #292827;
+    }
+    .animated-gradient > noise-filter {
+        mix-blend-mode: soft-light;
+    }
+    #ball {
+        background-color: #d7caab;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    #detail {
+        height: 300px !important;
+        width: 256px;
+    }
+    .p2 {
+        font-size: 1.8em !important;
+    }
+    #container {
+        margin: calc(100vh / 40) !important;
+    }
+}
+
+
+@media only screen and (max-height: 950px) {
+    #detail {
+        margin-left:32px;
+        height: auto  !important;
+        width: -webkit-fill-available !important;
+
+    }
+    .p2 {
+        font-size: 1.8em !important;
+    }
+    .h1 {
+        font-size: 4em !important;
+    }
+    .h2 {
+        font-size: 3em !important;
+    }
+    .h3 {
+        font-size: 2.5em !important;
+    }
+    .h4 {
+        font-size: 2em !important;
+    }
+    .h5 {
+        font-size: 1.5em !important;
+    }
+}
+
+@media only screen and (max-height: 768px) {
+    .p2 {
+        margin-bottom: -18px;
+        font-size: calc(100vh / 40) !important;
+    }
+}
+
+
+#container {
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
     position: absolute;
+    top: 0;
+    left: 0;
+    margin: 64px;
+    border: #292827 solid 1px;
 }
 
 
-#bouncing-text {
-	font-size: 2em;
+table {
+    margin-top: 64px;
+    margin-left: 64px;
+    z-index: 1000;
+    position: relative;
+}
+
+
+.h1 {
+    font-size: 6em;
+}
+
+.h2 {
+    font-size: 4.5em;
+}
+
+.h3 {
+    font-size: 3.7em;
+}
+
+.h4 {
+    font-size: 3em;
+}
+
+.h5 {
+    font-size: 2.4em;
+}
+
+.p1 {
+    font-size: 2.8em;
+}
+
+.p2 {
+    font-size: 2.3em;
+}
+
+.p3 {
+    font-size: 1.8em;
+}
+
+a {
+    transition: all 0.2s ease-out;
+    border-bottom: #292827 solid 1px;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+a:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+
+}
+
+#detail {
     position: absolute;
-	height: 2em;
+    z-index: 100;
+    bottom: 32px;
+    right: 64px;
+    height: 486px;
+    width: 300px;
+
+    font-family: "EB Garamond";
 }
 
 
+@keyframes gradient {
+    0% {background-position: 0% 100%;}
+    50% {background-position: 100% 0%;}
+    100% {background-position: 0% 100%;}
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+}
+  
+.animated-gradient > noise-filter {
+    mix-blend-mode: soft-light;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fade-in 1s ease-in forwards;
+}
+  
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+  
+#ball {
+    opacity: 0;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    transition: all 0.3s ease-out;
+    filter: blur(10px);
+    mix-blend-mode: soft-light;
+    z-index: -100;
+}

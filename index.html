@@ -3,24 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouncing Image</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<title>dde.dev</title>
 </head>
-<body>
-    <img src="bounce.png" id="bouncing-image">
-	<p  id="bouncing-text">Hiiiiii</p>
-    <script src="main.js"></script>
+<body id="container" class="animated-gradient" >
 
-	<style id="css">
-body {
-background-image: linear-gradient(
-	360deg,
-	hsl(128, 43%, 19%) 0%,
-	hsl(158deg 91% 17%) 50%,
-	hsl(171deg 96% 20%) 100%
-);
-}
-	</style>
+	<table>
+		<thead>
+			<tr>
+				<td class="h4"><a href="">dde.dev</a></td>
+			</tr>
+			<tr>
+				<td class="h1">Daniel Saury</td>
+			</tr>
+			<tr>
+				<td class="h5">Software Engineer - Golang enthusiast</td>
+			</tr>
+		</thead>
+	</table>
+
+
+	
+	<table style="margin-top: 32px;">
+		<thead>
+			<tr><td class="h3">
+				<a href="https://github.com/periaate">Projects</a>
+			</td</tr>
+			<tr><td class="h3">
+				<a href="https://linkedin.com/in/daniel-saury">About me</a>
+			</td></tr>
+			<tr><td class="h3">
+				<a href="mailto:daniel@saury.fi">Contact me</a>
+			</td></tr>
+		</thead>
+	</table>
+
+
+	<p id="detail" class="p2">
+		To me, software is as much a career as it is a passion. As an engineer, my passions are databases, distributed systems, and mathematics. I value simplicity, practicality, and maintainability, reflected in my preference for Go. The feeling of being challenged, learning that I am capable of something I didn't know I was. This is what fuels my passion.
+	</p>
+
+	
+	<div class="fade-in">
+		<div  id="ball"></div>
+		<div class="full noise-filter"></div>
+	</div>
+	<script src="main.js"></script>
+
+	
 </body>
 </html>
+
+
+
