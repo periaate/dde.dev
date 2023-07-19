@@ -29,6 +29,14 @@ body, html {
 	font-family: 'Garamond Classico SC Regular';
 }
 
+#container * {
+    animation: fade-in 1s;
+}
+
+#detail {
+    animation: fade-in 2s;
+}
+
 @media (prefers-color-scheme: dark) {
     html {
         background-color: #292827;

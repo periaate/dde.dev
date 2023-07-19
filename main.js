@@ -53,14 +53,6 @@ Promise.all(blobs).then((values) => {
 	}, 64)
 })
 
-// get animation frame
-
-
-// once
-
-
-
-
 
 document.addEventListener('mousemove', function(event) {
 	const ball = document.getElementById('ball');
@@ -72,21 +64,16 @@ document.addEventListener('mousemove', function(event) {
 		mouseX = event.pageX;
 		mouseY = event.pageY;
 	});
-
+	const speed = 0.5;
+	
 	setInterval(() => {
 		const ballX = ball.offsetLeft + ball.clientWidth / 2;
 		const ballY = ball.offsetTop + ball.clientHeight / 2;
 		const deltaX = mouseX - ballX-64;
 		const deltaY = mouseY - ballY-64;
 	
-		const speed = 0.5;
-	
 		ball.style.left = ball.offsetLeft + deltaX * speed + 'px';
 		ball.style.top = ball.offsetTop + deltaY * speed + 'px';
 	}, 64);
-
-
-	
 } , {once: true});
-
 
