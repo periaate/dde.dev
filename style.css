@@ -22,14 +22,18 @@
 }
 
 * {
+    min-width: 0px;
+    min-height: 0px;
     padding: 0px;
     margin: 0px;
-    transition: all 0.3s ease-out;
+    transition: all 0.2s ease-out;
 }
 
 body, html {
-    margin: 0;
-    padding: 0;
+    text-size-adjust: none !important;
+    -webkit-text-size-adjust: none !important;
+    -ms-text-size-adjust: none !important;
+    -moz-text-size-adjust: none !important;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -44,9 +48,15 @@ body, html {
     animation: fade-in 2s;
 }
 
+#c {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
 @media (prefers-color-scheme: dark) {
-    html {
-        background-color: #292827;
+    #c {
+        background-color: #292827 !important;
     }
     * {
         color: #d7caab;
@@ -67,7 +77,7 @@ body, html {
 }
 
 @media (prefers-color-scheme: light) {
-    html {
+    #c {
         background-color: #e6dbc1;
     }
     #container {
@@ -80,55 +90,69 @@ body, html {
         background-color: #292827;
     }
     #ball {
-        background-color: #d7caab;
+        background-color: #d7caab !important;
     }
 }
-
-@media only screen and (max-height: 768px) {
-    .p2 {
-        margin-bottom: -18px;
-        font-size: calc(100vh / 40) !important;
-    }
-}
-
 
 #container {
+    display: flex;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+    width: -moz-available;
+    height: -moz-available;
     position: absolute;
-    top: 0;
-    left: 0;
-    margin: 64px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
     border: #292827 solid 1px;
+    flex-direction: column;
+    margin: calc(100vh / 30);
+    padding: calc(100vh / 30);
+    overflow: hidden;
 }
 
+.flex-cont {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
 
-table {
-    margin-top: 64px;
-    margin-left: 64px;
-    z-index: 1000;
+#d2 {
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#detail {
+    display: flex;
     position: relative;
+    max-width: 270px;
+
+    font-family: "EB Garamond";
 }
+
 
 
 .h1 {
-    font-size: 6em;
+    font-size: clamp(3em, 5vw, 80px);
 }
 
 .h2 {
-    font-size: 4.5em;
+    font-size: clamp(2em, 4vw, 60px);
 }
 
 .h3 {
-    font-size: 3.7em;
+    font-size: clamp(1.9em, 3.5vw, 50px);
 }
 
 .h4 {
-    font-size: 3em;
+    font-size: clamp(1em, 3vw, 44px);
 }
 
 .h5 {
-    font-size: 2.4em;
+    font-size: clamp(1em, 2.5vw, 33px);
 }
 
 .p1 {
@@ -136,7 +160,7 @@ table {
 }
 
 .p2 {
-    font-size: 2.3em;
+    font-size: clamp(0.8em, 2.2vh, 26px);
 }
 
 .p3 {
@@ -144,45 +168,7 @@ table {
 }
 
 
-
-#container {
-    margin: calc(100vh / 30) !important;
-}
-
-@media (max-width: 900px) {
-    .h1 {
-        font-size: 5vw;
-    }
-    .h2 {
-        font-size: 4vw;
-    }
-    .h3 {
-        font-size: 3.5vw;
-    }
-    .h4 {
-        font-size: 3vw;
-    }
-    .h5 {
-        font-size: 2.5vw;
-    }
-    .p1 {
-        font-size: 2.2vw;
-    }
-    .p2 {
-        font-size: 2vw !important;
-    }
-    .p3 {
-        font-size: 1.8vw;
-    }
-    #detail {
-        height: 15vh !important;
-        bottom: 15vh !important;
-        width: 50vw !important;
-    }
-}
-
 a {
-    transition: all 0.2s ease-out;
     border-bottom: #292827 solid 1px;
     text-decoration: none;
     color: inherit;
@@ -193,18 +179,8 @@ a:hover {
     padding-left: 10px;
     padding-right: 10px;
     cursor: pointer;
+    text-shadow: #292827a8 0px 0px 10px;
 
-}
-
-#detail {
-    position: absolute;
-    z-index: 100;
-    bottom: 4vh;
-    right: 64px;
-    height: 486px;
-    width: 300px;
-
-    font-family: "EB Garamond";
 }
 
 
@@ -222,10 +198,10 @@ a:hover {
   
 #ball {
     opacity: 0;
-    top: calc(50% - 25px);
-    left: calc(50% - 25px);
-    width: 50px;
-    height: 50px;
+    top: calc(50% - 2.5vh);
+    left: calc(50% - 2.5vh);
+    width: 5vh;
+    height: 5vh;
     border-radius: 50%;
     position: absolute;
     transition: all 0.3s ease-out;

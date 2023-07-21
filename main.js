@@ -3,7 +3,11 @@ console.log("Design inspired by https://p5aholic.me/")
 
 
 document.addEventListener('mousemove', () => {
-	const ball = document.getElementById('ball');
+	const ball = document.createElement('div');
+	// set id
+	ball.id = "ball";
+	document.getElementById("container").appendChild(ball);
+	// document.body.appendChild(ball);
 	ball.style.opacity = 1;
 	let mouseX = 0;
 	let mouseY = 0;
@@ -15,10 +19,11 @@ document.addEventListener('mousemove', () => {
 	const speed = 0.5;
 
 	setInterval(() => {
-		const ballX = ball.offsetLeft + ball.clientWidth / 2;
+		const ballX = ball.offsetLeft + ball.clientHeight / 2;
 		const ballY = ball.offsetTop + ball.clientHeight / 2;
-		const deltaX = mouseX - ballX-64;
-		const deltaY = mouseY - ballY-64;
+		const offset = window.innerHeight / 30 ;
+		const deltaX = mouseX - ballX - offset;
+		const deltaY = mouseY - ballY - offset;
 	
 		ball.style.left = ball.offsetLeft + deltaX * speed + 'px';
 		ball.style.top = ball.offsetTop + deltaY * speed + 'px';
