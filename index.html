@@ -3,57 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>dde.dev</title>
 
 	<meta property="og:title" content="Daniel Saury" >
 	<meta property="og:site_name" content="dde.dev">
 	<meta property="og:url" content="https://dde.dev">
-	<meta property="og:description" content="Software engineer and Golang enthusiast">
+	<meta property="og:description" content="Portfolio, blog, and personal website of Daniel Saury.">
 	<meta property="og:type" content="profile">
+
+	<style>
+		details > details {	margin-left: 20px; }
+		details > p { margin-left: 20px; }
+	</style>
 </head>
-<body id="c">
-	<div id="container" class="animated-gradient">
-	<div class="flex-cont">
-	<table>
-		<thead>
-			<tr>
-				<td class="h4"><a href="">dde.dev</a></td>
-			</tr>
-			<tr>
-				<td class="h1">Daniel Saury</td>
-			</tr>
-			<tr>
-				<td class="h5">Software Engineer - Golang enthusiast</td>
-			</tr>
-		</thead>
-	</table>
+<body>
+    <div class="hero">
+		<nav class="container-fluid">
+			<ul>
+			  <li>
+				<a href="https://dde.dev/" class="contrast">dde.dev</a>
+			  </li>
+			</ul>
+			<ul>
+			  <li><strong>Daniel Saury</strong></li>
+			</ul>
+			<ul>
+			  <li><a data-tooltip="GitHub" data-placement="left" style="font-size:xx-large" class="contrast fa" href="https://github.com/periaate">&#xf09b;</a></li>
+			</ul>
+		  </nav>
+		</div>
 
-	<table style="margin-top: 32px;">
-		<thead>
-			<tr><td class="h3">
-				<a href="https://github.com/periaate">Projects</a>
-			</td</tr>
-			<tr><td class="h3">
-				<a href="https://linkedin.com/in/daniel-saury">About me</a>
-			</td></tr>
-			<tr><td class="h3">
-				<a href="mailto:daniel@saury.fi">Contact me</a>
-			</td></tr>
-		</thead>
-	</table>
+	<main class="container">
+		<hgroup>
+			<h2>Hello!</h2>
+			<h3>Welcome to my (WIP) website.</h3>
+		</hgroup>
+		<p>
+			I'm a software developer specialized in systems and backend development.
+		</p>
 
-	</div>
-	<div id="d2"class="flex-cont">
-
-	<p id="detail" class="p2">
-		To me, software is as much a career as it is a passion. As an engineer, my passions are databases, distributed systems, and mathematics. I value simplicity, practicality, and maintainability, reflected in my preference for Go. The feeling of being challenged, learning that I am capable of something I didn't know I was. This is what fuels my passion.
-	</p>
-	
-	</div>
-	</div>
-	
-	<script src="main.js"></script>
+		<details open>
+			<summary>Projects</summary>
+			<details>
+				<summary>PartDB — Persistent Key-Value database for Go</summary>
+				<p>
+					PartDB is a key-value database based on native Go types.
+				</p>
+			</details>
+			<details>
+				<summary>TBA — Powerful multimedia browser</summary>
+				<p>
+					WIP
+				</p>
+			</details>
+			<details>
+				<summary>Lorem — Consectetur adipiscing elit </summary>
+				<p>
+					WIP
+				</p>
+			</details>
+			<details>
+				<summary>Ipsum — Vel enim interdum sodales</summary>
+				<p>
+					WIP
+				</p>
+			</details>
+			<details>
+				<summary>Dolor — Neque sit amet condimentum</summary>
+				<p>
+					WIP
+				</p>
+			</details>
+		</details>
+		
+	</main>
+	<footer class="container">
+		<small>Contact me: <a href="mailto:daniel@saury.fi">daniel@saury.fi</a></small>
+	</footer>
 </body>
 </html>
