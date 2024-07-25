@@ -1,15 +1,8 @@
 
-// load local storage
-const load = name => { return localStorage.getItem(name) ?? 'user'; }
-
-// save local storage
-const save = name => data => { localStorage.setItem(name, data); }
-
 class ThemeToggle extends HTMLElement {
 	constructor() {
 		super();
-		const pref = load('theme');
-		this.setAttribute('data-theme', pref);
+		this.setAttribute('data-theme', localStorage.getItem('theme') ?? 'user');
 	}
 
 	connectedCallback() { this.addEventListener('click', this.toggleTheme); }
@@ -22,7 +15,7 @@ class ThemeToggle extends HTMLElement {
 			dtheme === 'dark' ? 'light' :
 			'user';
 		this.setAttribute('data-theme', theme);
-		save('theme')(theme);
+		localStorage.setItem('theme', theme);
 	}
 }
 

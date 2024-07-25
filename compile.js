@@ -10,39 +10,23 @@ function execCmd(cmd, ...args) {
 		return output.trim();
 	} catch (error) {
 		// Return the error message if the command fails
-		return `Error: ${error.message}`;
+		return `cmd: ${cmd}, args: ${args}, Error: ${error.message}`;
 	}
 }
 
 //cd to pages
 process.chdir('./pages');
+console.log(process.cwd());
 // Example usage
-const result = execCmd('list', 'pages', 'r', '?', '.md');
-console.log(result);
+const results = execCmd('list', 'r', '?', '.md');
+console.log(results);
 
 process.chdir('..');
-
-result.split('\n').forEach((file) => {
-	const n = execCmd('fsio', 'name', file);
-	const dir = execCmd('fsio', 'dir', file);
-	console.log(n);
+console.log(process.cwd());
 
 
-	const tar = `./compiled/${dir}/${n}.html`.replace("//", "/");
-	execCmd('mdtohtml', file, tar);
 
-	const cnt = {
-		"meta": meta(execCmd('fsio', 'read', file)),
-		"main": execCmd('fsio', 'read', tar),
-	}
-
-	const fin = parse(cnt);
-	const out = `./${dir}/${n}.html`.replace("//", "/");
-
-
-});
-
-const meta = (cnt) => {
+function meta(cnt) {
 	const line = cnt.split('\n')[0];
 	const split = line.split(';;');
 	return `
@@ -55,37 +39,27 @@ const meta = (cnt) => {
 	`
 }
 
-const fs = require('fs').promises;
+function readFiles(paths) {
+	const result = {}
+	paths.map((path) => {
+		const p = execCmd('fsio', 'name', path);
+		try {
+			const data = execCmd('fsio', 'read', path);
+			const fixed = p.replaceAll(".part", "")
+			console.log(fixed)
+			result[fixed] = data;
+		} catch (error) {
+			console.error(`Error reading file at ${path}:`, error);
+			result[p] = null;
+		}
+	});
 
-/**
-	* Reads the contents of the files at the given paths.
-	* @param {string[]} paths - Array of file paths.
-	* @returns {Promise<Object>} - A promise that resolves to an object with paths as keys and file contents as values.
-	*/
-	async function readFiles(paths) {
-		const result = {};
+	return result;
+}
 
-		await Promise.all(paths.map(async (path) => {
-			try {
-				const data = await fs.readFile(path, 'utf8');
-				result[path] = data;
-			} catch (error) {
-				console.error(`Error reading file at ${path}:`, error);
-				result[path] = null;
-			}
-		}));
 
-		return result;
-	}
 
-// Example usage
-(async () => {
-	const paths = result.split('\n');
-	const contents = await readFiles(paths);
-	console.log(contents);
-})();
-
-const parse = (obj) => (cnt) => {
+function parse(obj, cnt) {
 	return `
 	<!DOCTYPE html>
 	<html>
@@ -103,8 +77,51 @@ const parse = (obj) => (cnt) => {
 	<footer>
 		${obj.footer}
 	</footer>
+	</body>
+	</html>
 	`
 }
 
+const fs = require('fs');
 
 
+process.chdir('./parts');
+console.log(process.cwd());
+
+const result = execCmd('list');
+console.log(result);
+const paths = result.split('\n');
+const obj = readFiles(paths);
+console.log(obj);
+
+process.chdir('..');
+
+console.log(process.cwd());
+
+console.log(results);
+
+
+results.split('\n').forEach((file) => {
+	let n = execCmd('fsio', 'name', file);
+	let dir = execCmd('fsio', 'dir', file);
+	dir = dir.replaceAll("./", "").replaceAll(".", "");
+	n = n.replaceAll("./", "");
+	console.log(n, file, dir);
+
+
+	const tar = `./compiled/${dir}/${n}.html`.replace("//", "/").replace("././", "./");
+	console.log(tar)
+	file = `./pages/${file}`
+	execCmd('mdtohtml', file, tar);
+	const m = meta(execCmd('fsio', 'read', file))
+
+	const cnt = {
+		"meta": m,
+		"main": execCmd('fsio', 'read', tar),
+	}
+
+	const fin = parse(obj, cnt);
+	const out = `./${dir}/${n}.html`.replace("//", "/").replace("././", "./");
+	console.log(out, fin);
+	fs.writeFileSync(out, fin);
+});

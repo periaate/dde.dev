@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP&display=swap');
 
 :root {
 	color-scheme: light dark;
@@ -10,8 +10,8 @@
 
 
 	--c-fg-1: var(--c-fg);
-	--c-fg-2: color-mix(var(--c-fg), var(--c-bg), 50%);
-	--c-fg-3: color-mix(var(--c-fg), var(--c-bg), 25%);
+	--c-fg-2: color-mix(in srgb, var(--c-fg) 80%, var(--c-bg), 80%);
+	--c-fg-3: color-mix(in srgb, var(--c-fg) 50%, var(--c-bg) 100%);
 
 	--c-tx-1: var(--c-fg-1);
 
@@ -27,20 +27,12 @@
 }
 
 
-@font-face {
-    font-family: 'Migu1M';
-    src: url('/migu-1m-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html {
-    font-family: 'Migu1M', sans-serif;
+	font-family: 'Noto Serif JP', sans-serif;
 
 	background-color: var(--c-bg-1);
 	padding: 16px;
 
-	&:has(theme-toggle[data-theme="user"]) { color-scheme: light dark; }
 	&:has(theme-toggle[data-theme="dark"]) { color-scheme: dark; }
 	&:has(theme-toggle[data-theme="light"]) { color-scheme: light; }
 }
@@ -67,7 +59,7 @@ body {
 		margin: 0 auto;
 	}
 
-	@media (min-width: 1680px) {
+	@media (min-width: 1400px) {
 		zoom: 1.5;
 		/*max-width: 1024px;*/
 		max-width: 768px;
@@ -86,7 +78,7 @@ h3 { font-size: var(--s-h3); }
 h4 { font-size: var(--s-h4); }
 h5 { font-size: var(--s-h5); }
 h6 { font-size: var(--s-h6); }
-p, blockquote, span { color: var(--c-tx-1); font-size: var(--s-p); }
+p, blockquote { color: var(--c-tx-1); font-size: var(--s-p); }
 a { color: var(--c-tx-1); font-size: var(--s-a); }
 
 h1, h2, h3, h4, h5, h6 {
@@ -119,3 +111,13 @@ body > header {
 }
 
 
+.clueless {
+	display: inline-block;
+	background-image: url('/static/icons/clueless.png');
+	height: 1.5em;
+	width: 1.5em;
+	background-size: contain;
+	position: relative;
+	top: 0.2em;
+	margin-top: -0.2em;
+}
