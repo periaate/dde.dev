@@ -1,4 +1,4 @@
-<h1>dde</h1>
+<h1>Building process of this blog</h1>
 
 <p>This &ldquo;blog&rdquo; has taken a lot of development to get it to even a basic state.</p>
 
@@ -26,69 +26,8 @@ So I decided to make my own, how hard could it be after all? <span class="cluele
 <li>Generating static HTML from markdown files.</li>
 </ul>
 
-<h2>Abstraction, not indirection</h2>
-
-<p>Cognitive overhead comes from indirection, not necessarily abstraction.</p>
-
-<p>This expression is relatively abstract. Some might argue that it is hard to read, not maintanable, etc.
-But in truth, this is deceptively simple. It might be higher order in the way it abstracts its logic,
-but at its core, it is procedural.</p>
-
-<pre><code class="language-go">fileNames, err := fsio.Walk(gen.Not(fsio.IsDir))(&quot;.&quot;)
-</code></pre>
-
-<p>It has just a single level of indirection. It doesn&rsquo;t hide the underlying procedures, but rather raises them to higher order of abstraction.</p>
-
-<pre><code class="language-go">// fsio.IsDir
-func IsDir(f string) bool {
-	info, err := os.Stat(f)
-	if err != nil {
-		return false
-	}
-	return info.IsDir()
-}
-</code></pre>
-
-<pre><code class="language-go">// gen.Not
-func Not[T any](fn func(T) bool) func(T) bool {
-	return func(t T) bool { return !fn(t) }
-}
-</code></pre>
-
-<pre><code class="language-go">// fsio.Walk
-func Walk(fn func(string) bool) func(string) (res []string, err error) {
-	return func(root string) (res []string, err error) {
-		err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-			if err != nil {
-				return err
-			}
-			if !fn(path) {
-				return nil
-			}
-
-			path = Normalize(path)
-			res = append(res, path)
-			return nil
-		})
-
-		return
-	}
-}
-</code></pre>
-
-<p>The goal of abstraction, to me anyway, is not to obfuscate the nature of the underlying procedures.
-But rather, to enable the reuse, composition, and utilization of those abstractions.</p>
-
-<p>Conceptualize it by analogy to natural language.
-What would a spoken language be like if words hid their meaning?
-The value of a word, in truth, comes not from the meaning of the <strong><em>word</em></strong>, but from the way that word transforms the meaning of the <strong><em>sentence</em></strong>.</p>
-
-<p>Applied to software, library and core development especially, then, the goal of an abstraction is to provide constructive &ldquo;words&rdquo; which can be composed to create &ldquo;sentences&rdquo;.</p>
-
-<p>So when we compare this kind of &ldquo;low indirection, high abstraction&rdquo; approach to the more common &ldquo;high indirection, high abstraction&rdquo; approach, what do we find?
-The difference between them lies in the nature of how things are structured. Low indirection means high &ldquo;width&rdquo;, while high indirection means high &ldquo;depth&rdquo;.</p>
-
-<p>If to understand what a piece of code does requires you to recurse through function or struct definitions, that would be high indirection.
-If to understand what a piece of code does requires you to one by one look at the definitions of functions being composed, that is low indirection.</p>
-
-<p>To conclude, low indirection enables the logic to be uncovered piece by piece, as opposed to having to maintain a &ldquo;stack&rdquo; of definitions while recursing through an abstraction.</p>
+<p>Finalized process:
+- list all <code>.part.html</code> files in <code>parts/</code>.
+- read found files, use the filename without the <code>.part.html</code> as the object keys, the content of those files as the value.
+- use <a href="https://github.com/gomarkdown/markdown"><code>mdtohtml</code></a> to parse markdown to html.
+- use JS templating to compile the <code>part</code> files and the compiled html to a single, complete page.</p>

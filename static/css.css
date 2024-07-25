@@ -110,14 +110,25 @@ body > header {
 	justify-content: space-between;
 }
 
-
-.clueless {
+[icon] {
 	display: inline-block;
-	background-image: url('/static/icons/clueless.png');
 	height: 1.5em;
 	width: 1.5em;
 	background-size: contain;
 	position: relative;
 	top: 0.2em;
 	margin-top: -0.2em;
+	&[icon='clueless'] { background-image: url('/static/icons/clueless.png'); }
+	&[icon='business'] { background-image: url('/static/icons/business.png'); }
+	&[icon='hii'] { background-image: url('/static/icons/hii.gif'); }
 }
+
+ul {
+	list-style-type: none;
+	margin-top: 0;
+	& * p { margin-top: 0; }
+}
+h4 {
+	margin-bottom: 0.5em;
+}
+
