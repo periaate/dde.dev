@@ -1,0 +1,71 @@
+package parts
+
+import "strings"
+
+type Meta struct {
+	Title string
+	Description string
+	Keywords []string
+	Image string
+	URL string
+	Name string
+}
+
+templ Head(meta Meta) {
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+	<link rel="stylesheet" type="text/css" href="/static/css.css" />
+
+	<title>{ meta.Title }</title>
+
+	<meta property="og:title" content={ meta.Title } />
+	<meta property="og:site_name" content="dde.dev" />
+	<meta property="og:url" content={ meta.URL } />
+	<meta property="og:description" content={ meta.Description } />
+	<meta property="og:type" content="profile" />
+
+	<meta name="keywords" content={ strings.Join(meta.Keywords, ",") } />
+	<meta property="og:keywords" content={ strings.Join(meta.Keywords, ",") } />
+
+	if len(meta.Image) > 0 {
+		<meta property="og:image" content={ meta.Image } />
+	}
+
+	<script src="/static/js.js" defer></script>
+
+	<link rel="stylesheet" href="/static/highlight-zenburn.css" />
+	<script src="/static/highlight.min.js"></script>
+	<script defer>hljs.highlightAll();</script>
+}
+
+templ Path(paths ...string) {
+	<div class="path">
+	<a href="/">dde.dev</a>
+	for i := range paths {
+		<a href={ "/" + templ.URL(strings.Join(paths[:i+1], "/") + ".html") }>{ paths[i] }</a>
+	}
+	</div>
+}
+
+templ Header(path templ.Component) {
+	@path
+	<theme-toggle></theme-toggle>
+}
+
+templ Footer() {
+	<small>Contact me: <a href="mailto:daniel@saury.fi">daniel@saury.fi</a></small>
+}
+
+
+templ Directory(root string, files []Meta) {
+for _, file := range files {
+	<a href={ "/" + templ.URL(root + "/" + file.Name + ".html") }>
+		<h4>{ file.Title }</h4>
+	</a>
+	<p>
+	@templ.Raw(file.Description)
+	</p>
+}
+}

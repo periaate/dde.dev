@@ -42,9 +42,9 @@ theme-toggle {
 	border-bottom: 1px solid var(--c-fg);
 	cursor: pointer;
 
-	&[data-theme="user"]:before { content: "🌐->🌙"; }
-	&[data-theme="dark"]:before { content: "🌙->🌞"; }
-	&[data-theme="light"]:before { content: "🌞->🌐"; }
+	&[data-theme="user"]:before { content: "🌐→🌙"; }
+	&[data-theme="dark"]:before { content: "🌙→🌞"; }
+	&[data-theme="light"]:before { content: "🌞→🌐"; }
 }
 
 body {
