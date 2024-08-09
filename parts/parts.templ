@@ -1,6 +1,8 @@
 package parts
 
 import "strings"
+import "golang.org/x/text/cases"
+import "golang.org/x/text/language"
 
 type Meta struct {
 	Title string
@@ -40,18 +42,31 @@ templ Head(meta Meta) {
 	<script defer>hljs.highlightAll();</script>
 }
 
+func fixPath(s string) string {
+	s =	strings.ReplaceAll(s, "-", " ")
+	s = cases.Title(language.English).String(s)
+	
+	return s
+}
+
 templ Path(paths ...string) {
 	<div class="path">
+	<span>
 	<a href="/">dde.dev</a>
+	</span>
 	for i := range paths {
-		<a href={ "/" + templ.URL(strings.Join(paths[:i+1], "/") + ".html") }>{ paths[i] }</a>
+		<span>
+		<a href={ "/" + templ.URL(strings.Join(paths[:i+1], "/") + ".html") }>{ fixPath(paths[i]) }</a>
+		</span>
 	}
 	</div>
 }
 
 templ Header(path templ.Component) {
+<header>
 	@path
 	<theme-toggle></theme-toggle>
+</header>
 }
 
 templ Footer() {

@@ -132,3 +132,15 @@ h4 {
 	margin-bottom: 0.5em;
 }
 
+
+
+.path {
+	:is(span):not(span:last-of-type) {
+		&::after {
+			text-style: none;
+			content: " / " ;
+		}
+	}
+}
+
+
